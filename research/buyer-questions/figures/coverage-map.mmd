@@ -1,0 +1,15 @@
+%% every question gets one mark from the gap check and one page that answers it
+flowchart LR
+  Q["one question<br/>in the buyer's words"] --> K{"what do assistants<br/>say today?"}
+  K --> N["nobody answers"]
+  K --> T["thin answer"]
+  K --> O["answer for someone else"]
+  K --> E["answer for this buyer"]
+  N --> L["open ground<br/>write the page first"]
+  T --> L
+  O --> L
+  E --> R["already stated<br/>use as proof, not headline"]
+  L --> Y(["page that answers it<br/>or: missing, planned"])
+  R --> Y
+  classDef ink fill:#121212,color:#ffffff,stroke:#121212
+  class Y ink
