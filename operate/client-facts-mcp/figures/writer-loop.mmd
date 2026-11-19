@@ -1,0 +1,11 @@
+%% every writer runs the same loop, and corrections flow back into the server
+flowchart TB
+  B["get_brief<br/>facts, rules, approved lines"] --> W["draft"]
+  W --> X["check_draft"]
+  X -->|"items to fix"| W
+  X -->|"clean"| R["add_asset<br/>record the finished piece"]
+  R --> E(["a person corrects it"])
+  E --> M["add_note<br/>the correction goes back"]
+  M -.-> B
+  classDef ink fill:#121212,color:#ffffff,stroke:#121212
+  class E ink

@@ -1,0 +1,13 @@
+{
+  "name": "client-facts-mcp",
+  "version": "1.1.0",
+  "description": "Builds one knowledge server per company that holds everything known about its marketing (approved messaging, a daily copy of its website, a facts file with settled, approved, held and never-say rows, house rules, the places it lives online, buyer questions, call notes) and sets one writer loop: get_brief, draft, check_draft, add_asset, with corrections returned through add_note. Use when asked to \"set up a facts server for a company\", \"stop writers using facts from memory\", \"build a facts file\", or make agents write from one source of truth.",
+  "author": {
+    "name": "Shashank SN",
+    "url": "https://github.com/shashank-sn"
+  },
+  "homepage": "https://github.com/shashank-sn/workflows/tree/main/operate/client-facts-mcp",
+  "repository": "https://github.com/shashank-sn/workflows",
+  "license": "MIT",
+  "keywords": ["mcp", "facts-file", "content-ops", "agents"]
+}
