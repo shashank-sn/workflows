@@ -1,0 +1,11 @@
+%% one audited place becomes three files, each for a different reader
+flowchart TB
+  A["audit of one place<br/>from the presence map"] --> F["full channel page<br/>the record"]
+  F --> C["founders' changes page<br/>the work"]
+  F --> X["appendix<br/>the proof"]
+  F -.-> W["the person doing the work<br/>and anyone checking it"]
+  C -.-> O["the founders<br/>only what needs their hands"]
+  X -.-> D["anyone who doubts a change"]
+  C --- N(["every paste is copied from the full page,<br/>never retyped"])
+  classDef ink fill:#121212,color:#ffffff,stroke:#121212
+  class C ink

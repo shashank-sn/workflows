@@ -1,0 +1,18 @@
+{
+  "name": "changes-page",
+  "version": "1.1.0",
+  "description": "Turns one audited place into three files: the full channel page (the record), the founders' changes page (each change grouped by where it happens, with the exact text to paste, the page to open, who does it and how to tell it worked) and an appendix (before and after views, examples, what AI assistants say today). Writes files only and never signs in, posts or sends. Use when asked to hand over an audit, write the changes for a listing, profile or registry page, or turn audit findings into work a founder can do.",
+  "author": {
+    "name": "Shashank SN",
+    "url": "https://github.com/shashank-sn"
+  },
+  "homepage": "https://github.com/shashank-sn/workflows/tree/main/presence/changes-page",
+  "repository": "https://github.com/shashank-sn/workflows",
+  "license": "MIT",
+  "keywords": [
+    "presence",
+    "audit-handover",
+    "founders",
+    "changes-page"
+  ]
+}
