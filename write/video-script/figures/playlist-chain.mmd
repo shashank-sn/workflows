@@ -1,0 +1,10 @@
+%% every video closes with its answer, one fixed line, and the next title
+flowchart TB
+  P["playlist plan<br/>titles in watch order"] --> V1["video 1"]
+  P --> V2["video 2"]
+  P --> V3["video 3"]
+  V1 -->|"answer, article line,<br/>next title"| V2
+  V2 -->|"answer, article line,<br/>next title"| V3
+  V3 --> E(["last video<br/>answer and article line only"])
+  classDef ink fill:#121212,color:#ffffff,stroke:#121212
+  class E ink

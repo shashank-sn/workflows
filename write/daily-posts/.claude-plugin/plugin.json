@@ -1,0 +1,18 @@
+{
+  "name": "daily-posts",
+  "version": "1.1.0",
+  "description": "Runs a daily posting loop where your answers stay the post: asks up to three questions about live debates with sources, saves your answers word for word, writes two drafts and a phrase list per answer, runs each draft through a voice-check editor, and schedules only drafts you approve by letter. Use when asked to \"post every day with ai\", \"run my daily posts\", \"draft from my answers\", or set up a morning-questions posting routine.",
+  "author": {
+    "name": "Shashank SN",
+    "url": "https://github.com/shashank-sn"
+  },
+  "homepage": "https://github.com/shashank-sn/workflows/tree/main/write/daily-posts",
+  "repository": "https://github.com/shashank-sn/workflows",
+  "license": "MIT",
+  "keywords": [
+    "social-posts",
+    "voice",
+    "ghostwriting-with-ai",
+    "scheduling"
+  ]
+}

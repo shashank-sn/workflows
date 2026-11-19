@@ -1,0 +1,11 @@
+%% buyer calls come first, then four checks decide which questions get measured
+flowchart TB
+  A["buyer calls<br/>verbatim, buyer turns only"] --> P["one pool<br/>every question has an id and a source"]
+  W["forums, reviews, search<br/>and the company's own triggers"] --> P
+  P --> G["grade by askers<br/>2 or more outside askers = confirmed"]
+  G --> X["gap check<br/>ask assistants without the company name"]
+  X --> V["independent check<br/>by a reviewer who did not write the rows"]
+  V --> F(["frozen set<br/>measured, never edited"])
+  V --> M["answer map<br/>answered, not measured"]
+  classDef ink fill:#121212,color:#ffffff,stroke:#121212
+  class F ink

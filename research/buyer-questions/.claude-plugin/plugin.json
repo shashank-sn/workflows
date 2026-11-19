@@ -1,0 +1,18 @@
+{
+  "name": "buyer-questions",
+  "version": "1.1.0",
+  "description": "Builds the question set to measure before you measure whether AI assistants and search recommend a company. Starts from buyer calls and buyer phrasing, checks what assistants already answer, has an independent reviewer check the set, freezes it, and writes a coverage map of which page answers each question. Use when asked to build a question set, pick prompts to track, find what buyers ask, plan AI answer or search coverage, or prepare input for a measurement.",
+  "author": {
+    "name": "Shashank SN",
+    "url": "https://github.com/shashank-sn"
+  },
+  "homepage": "https://github.com/shashank-sn/workflows/tree/main/research/buyer-questions",
+  "repository": "https://github.com/shashank-sn/workflows",
+  "license": "MIT",
+  "keywords": [
+    "ai-search",
+    "question-set",
+    "buyer-research",
+    "coverage-map"
+  ]
+}

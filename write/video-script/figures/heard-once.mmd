@@ -1,0 +1,9 @@
+%% one script goes through the checks in order, then to a rough cut the approver watches
+flowchart TB
+  W["script<br/>one chapter, one paragraph"] --> F["flow read<br/>one argument, heard once"]
+  F --> K["fact check<br/>a fresh reader, line by line"]
+  K --> M["missing-context read<br/>one line at a time"]
+  M --> R["rough cut<br/>the approver watches it"]
+  R --> A(["approved, then built"])
+  classDef ink fill:#121212,color:#ffffff,stroke:#121212
+  class A ink

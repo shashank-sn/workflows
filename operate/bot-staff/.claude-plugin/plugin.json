@@ -1,0 +1,18 @@
+{
+  "name": "bot-staff",
+  "version": "1.1.0",
+  "description": "Audits a set of scheduled agent routines and designs or redesigns them as a staff of single-job bots: a job sheet per bot, one shared record, an owner's yes before anything goes outside, direct handoffs, a chief-of-staff router, a weekly stand-up and build gates (scope cut, skeptic, QA, merge card). Use when asked to audit my bots or routines, design an agent team, redesign a bot setup, or write a bot job description.",
+  "author": {
+    "name": "Shashank SN",
+    "url": "https://github.com/shashank-sn"
+  },
+  "homepage": "https://github.com/shashank-sn/workflows/tree/main/operate/bot-staff",
+  "repository": "https://github.com/shashank-sn/workflows",
+  "license": "MIT",
+  "keywords": [
+    "ai-agents",
+    "bots",
+    "operations",
+    "automation"
+  ]
+}

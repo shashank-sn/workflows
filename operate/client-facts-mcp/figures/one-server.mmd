@@ -1,0 +1,11 @@
+%% one server per company holds seven kinds of knowledge, and writers reach it through four calls
+flowchart LR
+  K["messaging<br/>site copy<br/>facts file<br/>house rules"] --> S["one server<br/>per company"]
+  L["places online<br/>buyer questions<br/>call notes"] --> S
+  S --> G["get_brief"]
+  S --> C["check_draft"]
+  S --> A["add_asset"]
+  S --> N["add_note"]
+  F["facts file wins<br/>every conflict"] -.-> S
+  classDef ink fill:#121212,color:#ffffff,stroke:#121212
+  class S ink
