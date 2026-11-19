@@ -1,0 +1,11 @@
+%% the editor loop repeats until the draft passes, and a rewrite that adds a claim goes back to your words
+flowchart TB
+  D["draft"] --> R["editor review<br/>against voice profile and brief"]
+  R -->|"fails"| W["rewrite from the findings"]
+  W --> C{"adds a claim or<br/>changes your meaning?"}
+  C -->|"yes"| B["revert that part<br/>to your words"]
+  C -->|"no"| R
+  B --> R
+  R -->|"passes, or no more gain"| P(["shown to you"])
+  classDef ink fill:#121212,color:#ffffff,stroke:#121212
+  class P ink

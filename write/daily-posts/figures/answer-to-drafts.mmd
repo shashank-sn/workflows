@@ -1,0 +1,11 @@
+%% one answer becomes two drafts and a list, and only a lettered draft reaches the schedule
+flowchart LR
+  A["your answer<br/>saved word for word"] --> D1["draft a<br/>your order, your words"]
+  A --> D2["draft b<br/>a different way in,<br/>same answer"]
+  A --> L["phrase list<br/>every phrase not from you"]
+  D1 --> E["voice-check editor"]
+  D2 --> E
+  E --> Y(["your letter<br/>1a, 2b"])
+  Y --> S["fixed slots"]
+  classDef ink fill:#121212,color:#ffffff,stroke:#121212
+  class Y ink
