@@ -4,13 +4,13 @@
     "name": "Shashank SN",
     "url": "https://github.com/shashank-sn"
   },
-  "description": "Workflows written down step by step, each packaged as an agent skill: delivery loop, two-axis review, voice profile, measurement protocol, deliverable audit, presence map, and skill-from-setup.",
+  "description": "Workflows written down step by step, each packaged as an agent skill: delivery loop, two-axis review, voice profile, daily posts, video script, measurement protocol, buyer questions, blind scoring, deliverable audit, bot staff, client facts MCP, presence map, skill-from-setup, and changes page.",
   "version": "1.0.0",
   "plugins": [
     {
       "name": "delivery-loop",
       "source": "./build/delivery-loop",
-      "description": "Runs a code change from request to an open pull request through eleven gated stages (route, grill, spec, slices, build, simplify, prune, dogfood, verify at the revision, two-axis review, ship) and leaves evidence at each stage.",
+      "description": "Runs a code change from request to an open pull request through eleven gated stages (route, grill, spec, slices, build, simplify, prune, dogfood, verify at the revision, two-axis review, ship) and leaves evidence at each stage. Stops before merge. Use when asked to \"run the delivery loop\", \"build this properly\", or \"ship this end to end\".",
       "version": "1.1.0",
       "category": "build",
       "tags": [
@@ -23,7 +23,7 @@
     {
       "name": "two-axis-review",
       "source": "./build/two-axis-review",
-      "description": "Reviews a diff on two independent axes and reports them side by side: Standards (the repo's documented conventions plus a baseline of twelve code smells) and Spec (does the change implement the issue, ticket or spec, traced requirement by requirement to code and tests).",
+      "description": "Reviews a diff on two independent axes and reports them side by side: Standards (the repo's documented conventions plus a baseline of twelve code smells) and Spec (does the change implement the issue, ticket or spec, traced requirement by requirement to code and tests). Read-only. Use when asked to \"review this diff\", \"review the PR\", or run a \"two-axis review\".",
       "version": "1.0.0",
       "category": "build",
       "tags": [
@@ -36,7 +36,7 @@
     {
       "name": "voice-profile",
       "source": "./write/voice-profile",
-      "description": "Builds an explicit, testable voice profile from a writer's or company's existing samples, checks it against held-out samples, writes an editing brief, and reviews drafts with voice fit, pattern findings, factual evidence and approval kept as four separate reports.",
+      "description": "Builds an explicit, testable voice profile from a writer's or company's existing samples, checks it against held-out samples, writes an editing brief, and reviews drafts with voice fit, pattern findings, factual evidence and approval kept as four separate reports. Use when asked to \"build a voice profile\", \"codify our style\", or \"review this draft against our voice\".",
       "version": "1.1.0",
       "category": "write",
       "tags": [
@@ -49,7 +49,7 @@
     {
       "name": "measurement-protocol",
       "source": "./research/measurement-protocol",
-      "description": "Designs and runs a measurement of a noisy, moving system (for example how often a brand appears in AI answer engines) without inventing progress: one rule file, equal readings, held-out controls and brand questions, repeats clustered by question, a minimum detectable rate, a calibration run, and a list of blind spots.",
+      "description": "Designs and runs a measurement of a noisy, moving system (for example how often a brand appears in AI answer engines) without inventing progress: one rule file, equal readings, held-out controls and brand questions, repeats clustered by question, a minimum detectable rate, a calibration run, and a list of blind spots. Use when asked to \"design a measurement\", \"build a baseline\", or \"measure visibility\".",
       "version": "1.1.0",
       "category": "research",
       "tags": [
@@ -62,7 +62,7 @@
     {
       "name": "deliverable-audit",
       "source": "./operate/deliverable-audit",
-      "description": "Audits a library of digital products for broken or missing delivery links.",
+      "description": "Audits a library of digital products for broken or missing delivery links. Classifies every review, maps each complaint to the deliverable it is about, finds the canonical file, fixes the link at the source, verifies each fix logged out (opens, right file type, right content), drafts a reply for every relevant review, and reports honest counts with the gaps that remain. Use when asked to \"audit product links\", \"fix the delivery links\", or \"check the free products\".",
       "version": "1.1.0",
       "category": "operate",
       "tags": [
@@ -75,7 +75,7 @@
     {
       "name": "presence-map",
       "source": "./presence/presence-map",
-      "description": "Maps every public place a company controls where buyers and AI tools read about it (GitHub, package and image registries, model hubs, docs, MCP and agent directories), sorts the places into one-time and recurring, audits the one-time places against the company's own sources, and drafts the fixes.",
+      "description": "Maps every public place a company controls where buyers and AI tools read about it (GitHub, package and image registries, model hubs, docs, MCP and agent directories), sorts the places into one-time and recurring, audits the one-time places against the company's own sources, and drafts the fixes. Never publishes. Use when asked to audit a company's online presence, check what AI tools see about a company, or plan where a company should show up.",
       "version": "1.1.0",
       "category": "presence",
       "tags": [
@@ -88,13 +88,104 @@
     {
       "name": "skill-from-setup",
       "source": "./presence/skill-from-setup",
-      "description": "Turns a one-time setup on one public place (a GitHub README, a registry listing, a directory entry, a profile page) into a reusable agent skill that any company can run.",
+      "description": "Turns a one-time setup on one public place (a GitHub README, a registry listing, a directory entry, a profile page) into a reusable agent skill that any company can run. Audits real pages on that place first, splits objective rules from company-specific sources, writes the SKILL.md and its reference files, and tests the skill with a fresh agent. Use when asked to make a skill, playbook, or repeatable process for a platform, listing, or profile.",
       "version": "1.1.0",
       "category": "presence",
       "tags": [
         "agent-skills",
         "playbooks",
         "skill-authoring"
+      ]
+    },
+    {
+      "name": "daily-posts",
+      "source": "./write/daily-posts",
+      "description": "Runs a daily posting loop where your answers stay the post: asks up to three questions about live debates with sources, saves your answers word for word, writes two drafts and a phrase list per answer, runs each draft through a voice-check editor, and schedules only drafts you approve by letter. Use when asked to \"post every day with ai\", \"run my daily posts\", \"draft from my answers\", or set up a morning-questions posting routine.",
+      "version": "1.1.0",
+      "category": "write",
+      "tags": [
+        "social-posts",
+        "voice",
+        "ghostwriting-with-ai",
+        "scheduling"
+      ]
+    },
+    {
+      "name": "buyer-questions",
+      "source": "./research/buyer-questions",
+      "description": "Builds the question set to measure before you measure whether AI assistants and search recommend a company. Starts from buyer calls and buyer phrasing, checks what assistants already answer, has an independent reviewer check the set, freezes it, and writes a coverage map of which page answers each question. Use when asked to build a question set, pick prompts to track, find what buyers ask, plan AI answer or search coverage, or prepare input for a measurement.",
+      "version": "1.1.0",
+      "category": "research",
+      "tags": [
+        "ai-search",
+        "question-set",
+        "buyer-research",
+        "coverage-map"
+      ]
+    },
+    {
+      "name": "blind-scoring",
+      "source": "./research/blind-scoring",
+      "description": "Compares versions of a text (original against edited, or edit A against edit B) without letting the scorer know which version is which. Shuffles each run's versions to neutral labels, keeps the key in a separate file, uses a fresh scorer per run with one fixed rubric, and reports per run and the mean with the sample size and its limits. Use when asked to \"score these edits blind\", \"compare the original and the rewrite\", \"A/B two edits\", or to check whether an edit really improved a text.",
+      "version": "1.1.0",
+      "category": "research",
+      "tags": [
+        "blind-scoring",
+        "ab-testing",
+        "evaluation",
+        "writing"
+      ]
+    },
+    {
+      "name": "client-facts-mcp",
+      "source": "./operate/client-facts-mcp",
+      "description": "Builds one knowledge server per company that holds everything known about its marketing (approved messaging, a daily copy of its website, a facts file with settled, approved, held and never-say rows, house rules, the places it lives online, buyer questions, call notes) and sets one writer loop: get_brief, draft, check_draft, add_asset, with corrections returned through add_note. Use when asked to \"set up a facts server for a company\", \"stop writers using facts from memory\", \"build a facts file\", or make agents write from one source of truth.",
+      "version": "1.1.0",
+      "category": "operate",
+      "tags": [
+        "mcp",
+        "facts-file",
+        "content-ops",
+        "agents"
+      ]
+    },
+    {
+      "name": "bot-staff",
+      "source": "./operate/bot-staff",
+      "description": "Audits a set of scheduled agent routines and designs or redesigns them as a staff of single-job bots: a job sheet per bot, one shared record, an owner's yes before anything goes outside, direct handoffs, a chief-of-staff router, a weekly stand-up and build gates (scope cut, skeptic, QA, merge card). Use when asked to audit my bots or routines, design an agent team, redesign a bot setup, or write a bot job description.",
+      "version": "1.1.0",
+      "category": "operate",
+      "tags": [
+        "ai-agents",
+        "bots",
+        "operations",
+        "automation"
+      ]
+    },
+    {
+      "name": "changes-page",
+      "source": "./presence/changes-page",
+      "description": "Turns one audited place into three files: the full channel page (the record), the founders' changes page (each change grouped by where it happens, with the exact text to paste, the page to open, who does it and how to tell it worked) and an appendix (before and after views, examples, what AI assistants say today). Writes files only and never signs in, posts or sends. Use when asked to hand over an audit, write the changes for a listing, profile or registry page, or turn audit findings into work a founder can do.",
+      "version": "1.1.0",
+      "category": "presence",
+      "tags": [
+        "presence",
+        "audit-handover",
+        "founders",
+        "changes-page"
+      ]
+    },
+    {
+      "name": "video-script",
+      "source": "./write/video-script",
+      "description": "Writes one product video as a complete package: a script told as one argument a listener can follow, the packaging (title, thumbnail, description, chapters, tags) and the shot notes for the builder. Flow-reads the script as heard, fact-checks it, and shows the approver a rough-cut video instead of a document. Use when asked for a video script, the next video in a playlist, a video description, or a handover for the person who builds the video.",
+      "version": "1.1.0",
+      "category": "write",
+      "tags": [
+        "video-script",
+        "youtube",
+        "product-video",
+        "playlist"
       ]
     }
   ]
