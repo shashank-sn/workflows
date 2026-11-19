@@ -4,9 +4,10 @@
 - plugin versions match their SKILL.md versions
 - every relative link and image in every Markdown file resolves
 - every workflow is listed on its topic page and on the home page
-- every SVG figure parses and has a white background (readable in GitHub dark mode)
+- every SVG image (figures and assets) parses and is in the DESIGN.md look: the light
+  ground rect (readable in GitHub dark mode), Allo embedded, a reduced-motion switch
 - every page title (the first heading) is lowercase
-- every figure .svg is up to date with its .mmd source (CI runs npm run figures:check)
+- every image .svg is up to date with its source (CI runs npm run figures:check)
 - no site files (HTML, CSS, Jekyll config) are left in the repo
 
 Usage: python3 scripts/check.py
@@ -93,15 +94,28 @@ def check_listings(workflows):
             errors.append(f"{wf}: no install line on the home README")
 
 
+LOOK_FILL = "#f5f5f5"
+OFF_LOOK = ("Google Sans", "#121212")  # traces of the old look
+
+
 def check_figures():
-    for svg in glob.glob("*/*/figures/*.svg", root_dir=ROOT):
+    """every image is in the stupidpreneur look (DESIGN.md)."""
+    for svg in sorted(glob.glob("*/*/figures/*.svg", root_dir=ROOT) + glob.glob("assets/*.svg", root_dir=ROOT)):
         try:
             xml.dom.minidom.parse(os.path.join(ROOT, svg))
         except Exception as exc:  # noqa: BLE001 - report any parse failure
             errors.append(f"{svg}: does not parse ({exc})")
             continue
-        if 'class="paper"' not in read(svg):
-            errors.append(f"{svg}: no white background rect (unreadable in dark mode)")
+        text = read(svg)
+        if not re.search(rf'<rect class="paper"[^>]*fill="{LOOK_FILL}"', text):
+            errors.append(f"{svg}: no {LOOK_FILL} ground rect (unreadable in dark mode)")
+        if "font-family:'allo'" not in text:
+            errors.append(f"{svg}: Allo is not embedded")
+        if "prefers-reduced-motion" not in text:
+            errors.append(f"{svg}: motion has no reduced-motion switch")
+        for trace in OFF_LOOK:
+            if trace in text:
+                errors.append(f"{svg}: uses {trace}, which is outside DESIGN.md")
 
 
 def check_titles():

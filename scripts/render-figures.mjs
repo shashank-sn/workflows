@@ -1,49 +1,41 @@
-// Renders every */*/figures/*.mmd (Mermaid) to an .svg next to it with Pele,
-// in the repo's monochrome look, and embeds Google Sans in every figure and in
-// the hand-made assets/*.svg. GitHub shows SVGs as images, which cannot load
-// web fonts or page CSS, so the font and the theme are baked into each file.
+// Renders every image in the repo in the stupidpreneur look (see DESIGN.md):
+//
+//   */*/figures/*.mmd   Mermaid sources, laid out by Pele, into .svg next to them
+//   assets/header.svg   the home header, built from .claude-plugin/marketplace.json
+//   assets/topic-*.svg  one card per topic, with its live count and skill list
 //
 //   npm install            (once)
-//   npm run figures        render figures and embed fonts
+//   npm run figures        render every image
 //   npm run figures:check  fail if any .svg is out of date
 //
-// Fonts: fonts/GoogleSans-{400,500,700}.ttf are Latin static instances of
-// Google Sans (SIL Open Font License 1.1, see fonts/OFL.txt). Each SVG embeds a
-// WOFF2 subset with only the characters and weights it uses.
+// GitHub shows SVGs as images, which cannot load web fonts, page CSS or
+// scripts, so each file carries its own Allo subset, its own colours and its
+// own CSS motion. Never edit a generated .svg by hand. Change the source.
 import { readFileSync, writeFileSync, globSync } from "node:fs";
 import { render } from "pele";
-import opentype from "opentype.js";
-import subsetFont from "subset-font";
+import { C, RADIUS, FONT, REDUCED, FADE, EASE, measure, embedFont } from "./design.mjs";
+import { TOPICS, header, topicCard } from "./assets.mjs";
 
 const THEME = {
-  bg: "#ffffff",
-  fg: "#121212",
-  muted: "#6b6b6b",
-  line: "#121212",
-  surface: "#ffffff",
-  "surface-alt": "#f5f5f5",
-  border: "#121212",
-  accent: "#121212",
-  critical: "#121212",
-  error: "#121212",
+  bg: C.ground,
+  fg: C.ink,
+  muted: C.muted,
+  line: C.ink,
+  surface: C.card,
+  "surface-alt": C.ground,
+  border: C.ink,
+  accent: C.lime,
+  critical: C.ink,
+  error: C.ink,
   radius: "10px",
 };
-const FONT = "'Google Sans', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif";
-const WEIGHTS = [400, 500, 700];
-const FONT_FILES = Object.fromEntries(WEIGHTS.map((w) => [w, readFileSync(`fonts/GoogleSans-${w}.ttf`)]));
-const FONTS = Object.fromEntries(
-  WEIGHTS.map((w) => {
-    const buf = FONT_FILES[w];
-    return [w, opentype.parse(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength))];
-  }),
-);
 
 // Pele lays out boxes from text widths, so measure with the real font.
 // style bits: 1 bold, 2 italic, 4 monospace.
 const measurer = {
   width(text, size, style) {
     if (style & 4) return text.length * size * 0.6;
-    return FONTS[style & 1 ? 700 : 400].getAdvanceWidth(text, size);
+    return measure(text, size, style & 1 ? 800 : 400);
   },
 };
 
@@ -60,49 +52,32 @@ function resolveVars(svg) {
   return svg;
 }
 
-function decode(text) {
-  return text
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;|&apos;/g, "'")
-    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
-    .replace(/&amp;/g, "&");
-}
-
-// Embed a WOFF2 subset of each weight the SVG uses, with only its characters.
-async function embedFont(svg) {
-  svg = svg.replace(/<style id="embedded-font">[\s\S]*?<\/style>/, "");
-  const body = svg.replace(/<title[\s\S]*?<\/title>/g, "");
-  const chars = new Set();
-  for (const [, inner] of body.matchAll(/<text\b[^>]*>([\s\S]*?)<\/text>/g)) {
-    for (const ch of decode(inner.replace(/<[^>]+>/g, ""))) chars.add(ch);
-  }
-  if (!chars.size) return svg;
-  const text = [...chars].join("");
-  const used = new Set([400]);
-  if (/font-weight(?:=|:)\s*"?(?:bold|700)/.test(body) || /<tspan[^>]*font-weight="bold"/.test(body)) used.add(700);
-  if (/font-weight(?:=|:)\s*"?500/.test(body)) used.add(500);
-  let faces = "";
-  for (const w of WEIGHTS.filter((w) => used.has(w))) {
-    const woff2 = await subsetFont(FONT_FILES[w], text, { targetFormat: "woff2" });
-    faces += `@font-face{font-family:'Google Sans';font-weight:${w};font-style:normal;src:url(data:font/woff2;base64,${woff2.toString("base64")}) format('woff2')}`;
-  }
-  return svg.replace(/^(<svg[^>]*>)/, `$1<style id="embedded-font">${faces}</style>`);
+// One-time motion for a figure: nodes fade in one after another in source
+// order, then the edges. Pele positions nodes with a transform attribute, so
+// only opacity moves. Everything rests in place, and reduced motion skips it.
+function figureMotion(svg) {
+  const nodes = (svg.match(/class="pele-node\b/g) || []).length;
+  const step = Math.min(0.09, 0.9 / Math.max(nodes, 1));
+  let css = FADE + `.pele-nodes>g{animation:fade .45s both ${EASE}}`;
+  for (let i = 1; i <= nodes; i++) css += `.pele-nodes>g:nth-child(${i}){animation-delay:${(0.1 + (i - 1) * step).toFixed(2)}s}`;
+  css += `.pele-edges{animation:fade .5s ${(0.25 + nodes * step).toFixed(2)}s both ${EASE}}`;
+  return `<style id="motion">${css}${REDUCED}</style>`;
 }
 
 async function renderFigure(source) {
   const { svg } = render(source, {
     fontFamily: FONT,
     fontSize: 15,
-    padding: 20,
+    padding: 28,
     responsive: false,
     autoDirection: false,
     measurer,
   });
-  const themed = resolveVars(svg).replace(
+  let themed = resolveVars(svg);
+  themed = themed.replace(/font-weight="bold"/g, 'font-weight="800"');
+  themed = themed.replace(
     /^(<svg[^>]*>)/,
-    '$1<rect class="paper" width="100%" height="100%" fill="#ffffff"/>',
+    `$1${figureMotion(themed)}<rect class="paper" width="100%" height="100%" rx="${RADIUS}" fill="${C.ground}"/>`,
   );
   return (await embedFont(themed)) + "\n";
 }
@@ -125,9 +100,9 @@ async function update(path, next) {
 for (const mmd of globSync("*/*/figures/*.mmd").sort()) {
   await update(mmd.replace(/\.mmd$/, ".svg"), await renderFigure(readFileSync(mmd, "utf8")));
 }
-for (const asset of globSync("assets/*.svg").sort()) {
-  const current = readFileSync(asset, "utf8");
-  await update(asset, (await embedFont(current.trimEnd())) + "\n");
+await update("assets/header.svg", (await embedFont(header())) + "\n");
+for (const topic of TOPICS) {
+  await update(`assets/topic-${topic.name}.svg`, (await embedFont(topicCard(topic))) + "\n");
 }
 
 if (check && stale.length) {
