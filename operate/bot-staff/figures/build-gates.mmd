@@ -1,0 +1,10 @@
+%% a build passes four gates, and the human sees one merge card at the end
+flowchart TB
+  I["build idea"] --> S["scope cut<br/>in, out, done-when"]
+  S --> Y["you approve"]
+  Y --> K["skeptic<br/>up to 5 objections, 2 rounds"]
+  K --> Bd["build and fresh review"]
+  Bd --> Q["qa<br/>done-when checks first,<br/>code second"]
+  Q --> M(["merge card<br/>merge, hand to a human reviewer, or hold"])
+  classDef ink fill:#121212,color:#ffffff,stroke:#121212
+  class M ink

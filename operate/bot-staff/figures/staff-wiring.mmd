@@ -1,0 +1,16 @@
+%% a staff of single-job bots: one shared record, a chief of staff, and the human gate
+flowchart TB
+  H["you<br/>say yes or no"] --> G(["nothing leaves<br/>without your yes"])
+  C["chief of staff<br/>routes requests, runs the stand-up"] --> B1["bot a<br/>one job, own memory"]
+  C --> B2["bot b<br/>one job, own memory"]
+  C --> B3["bot c<br/>one job, own memory"]
+  B1 <--> B2
+  B2 <--> B3
+  B1 --> W["the shared record<br/>if it is not here, it did not happen"]
+  B2 --> W
+  B3 --> W
+  B1 --> H
+  B2 --> H
+  B3 --> H
+  classDef ink fill:#121212,color:#ffffff,stroke:#121212
+  class G ink
