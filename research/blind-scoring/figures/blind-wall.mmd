@@ -1,0 +1,11 @@
+%% the key sits behind a wall: the scorer sees neutral labels only
+flowchart TB
+  V["versions of one text<br/>original, edit a, edit b"] --> SH["shuffle<br/>random order, neutral labels"]
+  SH --> L["x, y, z<br/>files with no names"]
+  SH -.-> K["key file<br/>label to version"]
+  L --> SC["fresh scorer<br/>one fixed rubric"]
+  SC --> S["scores for x, y, z"]
+  S --> R(["reveal: join scores to the key<br/>only after scoring ends"])
+  K -.-> R
+  classDef ink fill:#121212,color:#ffffff,stroke:#121212
+  class R ink

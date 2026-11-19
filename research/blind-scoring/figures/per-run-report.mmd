@@ -1,0 +1,9 @@
+%% every run gets its own shuffle and scorer, then the report shows each run and the mean
+flowchart TB
+  A["run 1<br/>own shuffle, own scorer"] --> T["table<br/>one row per run"]
+  B["run 2<br/>own shuffle, own scorer"] --> T
+  C["run n<br/>own shuffle, own scorer"] --> T
+  T --> M["mean per version<br/>and the difference from the original"]
+  M --> N(["state n, and what n<br/>can and cannot show"])
+  classDef ink fill:#121212,color:#ffffff,stroke:#121212
+  class N ink

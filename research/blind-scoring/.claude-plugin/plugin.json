@@ -1,0 +1,18 @@
+{
+  "name": "blind-scoring",
+  "version": "1.1.0",
+  "description": "Compares versions of a text (original against edited, or edit A against edit B) without letting the scorer know which version is which. Shuffles each run's versions to neutral labels, keeps the key in a separate file, uses a fresh scorer per run with one fixed rubric, and reports per run and the mean with the sample size and its limits. Use when asked to \"score these edits blind\", \"compare the original and the rewrite\", \"A/B two edits\", or to check whether an edit really improved a text.",
+  "author": {
+    "name": "Shashank SN",
+    "url": "https://github.com/shashank-sn"
+  },
+  "homepage": "https://github.com/shashank-sn/workflows/tree/main/research/blind-scoring",
+  "repository": "https://github.com/shashank-sn/workflows",
+  "license": "MIT",
+  "keywords": [
+    "blind-scoring",
+    "ab-testing",
+    "evaluation",
+    "writing"
+  ]
+}
